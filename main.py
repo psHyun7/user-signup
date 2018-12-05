@@ -33,7 +33,12 @@ def signup():
     else:
         username_error = "Username field is Blank."
 
-    if len(password) == 0 or len(password) > 16:
+    if not password:
+        password_error = "Password field is Blank."
+        password = ""
+        v_password = ""
+    
+    if len(password) > 16:
         password_error = "Not Valid: Password between the length of 1-16."
         password = ""
         v_password = ""
