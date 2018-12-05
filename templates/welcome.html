@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block header %}
+<title>Welcome!</title>
+{% endblock %}
+
+{% block content %}
+
+<h1>Welcome, {{username}}!</h1>
+
+<h2>Thanks for signing up!</h2>
+
+<form action='/'>
+    <input type="submit" value="Log out" />
+</form>
+
+{% endblock %}
