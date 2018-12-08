@@ -1,5 +1,4 @@
 from flask import Flask, request, redirect, render_template
-import os
 
 app = Flask(__name__)
 app.config['DEBUG'] = True
@@ -40,28 +39,18 @@ def signup_form():
 
         if not password:
             password_error = "Password field is Blank."
-            password = ""
-            v_password = ""
         
         if len(password) > 16:
             password_error = "Not Valid: Password between the length of 1-16."
-            password = ""
-            v_password = ""
 
         if " " in password:
             password_error = "Not Valid: Do not use space in Password."
-            password = ""
-            v_password = ""
+        
+        if " " in v_password:
+            v_password_error = "Not Valid: Do not use space in Password."
         
         if v_password != password:
             v_password_error = "The Passwords do not match."
-            password = ""
-            v_password = ""
-
-        if " " in v_password:
-            v_password_error = "Not Valid: Do not use space in Password."
-            password = ""
-            v_password = ""
 
         if email:
             for char in email:
@@ -69,10 +58,10 @@ def signup_form():
                     email_at_counter += 1
                 if char == ".":
                     email_dot_counter += 1
-                if email_dot_counter == 1 and email_at_counter == 0:
+            if email_dot_counter == 0 and email_at_counter == 0:
                     email_error = "Enter a Valid E-mail."
             if len(email) < 3 or len(email) > 20:
-                email_error = "Not Valid: E-mail length must be shorter than 20 characters long."
+                email_error = "Not Valid: E-mail length must be longer than 3 or shorter than 20 characters long."
             if email_at_counter > 1 or email_dot_counter > 1 or " " in email:
                 email_error = "Enter a Valid E-mail."
 
@@ -84,8 +73,6 @@ def signup_form():
         #Error Entry Return (Method = Post) : Conditional @ Line 14
         return render_template('signup.html',
             username_value=username,
-            password_value=password,
-            v_password_value=v_password,
             email_value=email,
             username_error=username_error,
             password_error=password_error,
@@ -97,7 +84,7 @@ def signup_form():
 @app.route('/welcome', methods=['POST', 'GET'])
 def  welcome():
     username = request.args.get("username")
-    return render_template('welcome.html', username=username)
-
+    return render_template('welcome.html', title="Welcome!", username=username)
+    
 
 app.run()
