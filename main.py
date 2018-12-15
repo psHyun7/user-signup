@@ -81,7 +81,7 @@ def signup_form():
             )
 
 #Welcome Page
-@app.route('/welcome', methods=['POST', 'GET'])
+@app.route('/welcome', methods=['GET'])
 def  welcome():
     username = request.args.get("username")
     return render_template('welcome.html', title="Welcome!", username=username)
