@@ -58,7 +58,7 @@ def signup_form():
                     email_at_counter += 1
                 if char == ".":
                     email_dot_counter += 1
-            if email_dot_counter == 0 and email_at_counter == 0:
+            if email_dot_counter == 0 or email_at_counter == 0:
                     email_error = "Enter a Valid E-mail."
             if len(email) < 3 or len(email) > 20:
                 email_error = "Not Valid: E-mail length must be longer than 3 or shorter than 20 characters long."
